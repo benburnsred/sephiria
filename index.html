@@ -342,6 +342,8 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
 /* cards */
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,540px),1fr));gap:20px;align-items:start}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:16px;scroll-margin-top:var(--dockh,130px);min-width:0;position:relative;overflow:hidden}
+.card{transition:box-shadow .2s,border-color .2s}
+.card.cur{border-color:var(--band);box-shadow:0 0 0 2px var(--band),0 10px 28px color-mix(in srgb,var(--band) 30%,transparent)}
 .card::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:var(--band)}
 .ch{display:flex;gap:14px;align-items:center}
 .kit{display:flex;gap:6px}
@@ -820,10 +822,11 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
   setH(); addEventListener('resize',setH);
   addEventListener('scroll',function(){dock.classList.toggle('stuck',dock.getBoundingClientRect().top<=1&&scrollY>40)},{passive:true});
   var links={}; [].slice.call(strip.querySelectorAll('.nv')).forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
+  function unmark(){document.querySelectorAll('.nv.cur,.card.cur').forEach(function(e){e.classList.remove('cur')})}
   function mark(id){
     var a=links[id]; if(!a||a.classList.contains('cur'))return;
-    for(var k in links)links[k].classList.remove('cur');
-    a.classList.add('cur');
+    unmark();
+    a.classList.add('cur'); document.getElementById(id).classList.add('cur');
   }
   // A clicked build stays highlighted until its row is reached (or the user scrolls by hand),
   // so the smooth scroll past other rows doesn't move the highlight.
@@ -839,7 +842,7 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
     });
     if(!row.length){var f=document.querySelector('.card:not(.hide)');if(f&&f.getBoundingClientRect().top<innerHeight*.6)row=[f]}
     if(lock){if(row.some(function(c){return c.id===lock}))lock=null; return}
-    if(!row.length){for(var k in links)links[k].classList.remove('cur'); return}
+    if(!row.length){unmark(); return}
     var cur=row.filter(function(c){return links[c.id]&&links[c.id].classList.contains('cur')})[0];
     mark((cur||row[0]).id);
   }

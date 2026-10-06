@@ -313,7 +313,8 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
 .legend .unl{color:var(--red)}
 .dock{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin-inline:-16px;padding:10px 16px;display:flex;flex-direction:column;gap:8px;background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
 .dock.stuck{border-bottom-color:var(--line)}
-.chips,.index{display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;padding-bottom:2px;scroll-behavior:smooth}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.index{display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;padding-bottom:2px;scroll-behavior:smooth}
 .chip{flex:none;white-space:nowrap}
 .chip{font:600 .85rem var(--f-body);border:1px solid var(--line);background:var(--card);color:var(--ink);padding:.4rem .8rem;border-radius:999px;cursor:pointer}
 .chip:hover{border-color:var(--mute)}

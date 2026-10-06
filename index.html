@@ -317,7 +317,21 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
 .dock.stuck{border-bottom-color:var(--line)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .index{display:flex;flex-wrap:wrap;gap:8px}
-@media (max-width:720px){.dock{position:static}}
+.dockbar{display:none}
+.dockpanel{display:contents}
+@media (max-width:720px){
+ .dock{padding-block:8px}
+ .dockbar{display:flex;align-items:center;gap:10px;width:100%;min-height:44px;padding:4px 12px 4px 6px;font:700 .95rem var(--f-body);color:var(--ink);background:var(--card);border:1px solid var(--line);border-left:4px solid var(--band,var(--line));border-radius:10px;cursor:pointer;text-align:left}
+ .db-ic{width:34px;height:30px;display:grid;place-items:center;flex:none;overflow:hidden}
+ .db-ic:empty{display:none}
+ .db-ic .ic{transform:scale(.7);margin:-6px -8px}
+ .db-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ .db-f{font-size:.72rem;font-weight:700;color:var(--mute);text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
+ .db-caret{color:var(--mute);transition:transform .2s}
+ .dock.open .db-caret{transform:rotate(180deg)}
+ .dockpanel{display:none;position:absolute;left:0;right:0;top:100%;padding:4px 16px 14px;flex-direction:column;gap:10px;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 14px 24px rgb(0 0 0/.18);max-height:calc(100dvh - 90px);overflow-y:auto}
+ .dock.open .dockpanel{display:flex}
+}
 .chip{flex:none;white-space:nowrap}
 .chip{font:600 .85rem var(--f-body);border:1px solid var(--line);background:var(--card);color:var(--ink);padding:.4rem .8rem;border-radius:999px;cursor:pointer}
 .chip:hover{border-color:var(--mute)}
@@ -444,8 +458,11 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
   <p class="howto"><b>Using presets:</b> press <b>Copy</b> next to a build's preset code, then paste the whole code into Sephiria's preset import field to load that setup. Builds with more than one code are labelled by run (e.g. Harsh Trial), so pick the one that matches yours. If the game rejects a code, check nothing got cut off and that your save has the build's items unlocked.</p>
  </header>
  <div class="dock" id="dock">
+  <button type="button" class="dockbar" id="dockbar" aria-expanded="false" aria-controls="dockpanel"><span class="db-ic" aria-hidden="true"></span><span class="db-name">Jump to a build</span><span class="db-f"></span><span class="db-caret" aria-hidden="true">▾</span></button>
+  <div class="dockpanel" id="dockpanel">
   <nav class="chips" aria-label="Filter builds"><button type="button" class="chip on" data-f="all">All</button><button type="button" class="chip" data-f="Artifact">Artifact</button><button type="button" class="chip" data-f="Debuff">Debuff</button><button type="button" class="chip" data-f="Normal Attack">Normal Attack</button><button type="button" class="chip" data-f="Solar Blade">Solar Blade</button><button type="button" class="chip" data-f="Special Attack">Special Attack</button><button type="button" class="chip" data-f="Storm Cloud">Storm Cloud</button><button type="button" class="chip" data-f="Weapon Effect">Weapon Effect</button><button type="button" class="chip five" data-f="5">★★★★★ only</button></nav>
   <nav class="index" id="index" aria-label="Jump to build"><a href="#star-platinum" class="nv g-steel" data-dmg="Artifact" data-stars="4"><span class="nvi"><i class="ic i0" aria-hidden="true"></i></span><span>Star Platinum</span><small>★★★★</small></a><a href="#machine-gun" class="nv g-steel" data-dmg="Special Attack" data-stars="5"><span class="nvi"><i class="ic i22" aria-hidden="true"></i></span><span>Machine Gun</span><small>★★★★★</small></a><a href="#spike-club" class="nv g-steel" data-dmg="Normal Attack" data-stars="4"><span class="nvi"><i class="ic i35" aria-hidden="true"></i></span><span>Spike Club</span><small>★★★★</small></a><a href="#sacred-jar" class="nv g-steel" data-dmg="Normal Attack" data-stars="4"><span class="nvi"><i class="ic i40" aria-hidden="true"></i></span><span>Sacred Jar</span><small>★★★★</small></a><a href="#solar-gun" class="nv g-sun" data-dmg="Solar Blade" data-stars="5"><span class="nvi"><i class="ic i45" aria-hidden="true"></i></span><span>Solar Gun</span><small>★★★★★</small></a><a href="#ilonica-staff" class="nv g-sun" data-dmg="Solar Blade" data-stars="5"><span class="nvi"><i class="ic i58" aria-hidden="true"></i></span><span>Ilonica Staff</span><small>★★★★★</small></a><a href="#liberation" class="nv g-sun" data-dmg="Special Attack" data-stars="4"><span class="nvi"><i class="ic i67" aria-hidden="true"></i></span><span>Liberation</span><small>★★★★</small></a><a href="#blizzard-s-eve" class="nv g-frost" data-dmg="Artifact" data-stars="5"><span class="nvi"><i class="ic i78" aria-hidden="true"></i></span><span>Blizzard&#x27;s Eve</span><small>★★★★★</small></a><a href="#frost-gun" class="nv g-frost" data-dmg="Normal Attack" data-stars="4"><span class="nvi"><i class="ic i89" aria-hidden="true"></i></span><span>Frost Gun</span><small>★★★★</small></a><a href="#frozen-smelt" class="nv g-frost" data-dmg="Debuff" data-stars="4"><span class="nvi"><i class="ic i95" aria-hidden="true"></i></span><span>Frozen Smelt</span><small>★★★★</small></a><a href="#blinding-silence" class="nv g-storm" data-dmg="Debuff" data-stars="5"><span class="nvi"><i class="ic i104" aria-hidden="true"></i></span><span>Blinding Silence</span><small>★★★★★</small></a><a href="#cloud-9" class="nv g-storm" data-dmg="Storm Cloud" data-stars="4"><span class="nvi"><i class="ic i116" aria-hidden="true"></i></span><span>Cloud 9</span><small>★★★★</small></a><a href="#boomerangs" class="nv g-storm" data-dmg="Artifact" data-stars="5"><span class="nvi"><i class="ic i124" aria-hidden="true"></i></span><span>Boomerangs</span><small>★★★★★</small></a><a href="#adamah-s-oath" class="nv g-arcane" data-dmg="Weapon Effect" data-stars="5"><span class="nvi"><i class="ic i133" aria-hidden="true"></i></span><span>Adamah&#x27;s Oath</span><small>★★★★★</small></a><a href="#crystal-shard" class="nv g-arcane" data-dmg="Special Attack" data-stars="4"><span class="nvi"><i class="ic i138" aria-hidden="true"></i></span><span>Crystal Shard</span><small>★★★★</small></a><a href="#magic-wand" class="nv g-arcane" data-dmg="Special Attack" data-stars="4"><span class="nvi"><i class="ic i145" aria-hidden="true"></i></span><span>Magic Wand</span><small>★★★★</small></a></nav>
+  </div>
  </div>
  <main class="cards">
 <article class="card g-steel" id="star-platinum" data-dmg="Artifact" data-stars="4">
@@ -816,6 +833,7 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
   chips.forEach(function(c){c.addEventListener('click',function(){
     chips.forEach(function(x){x.classList.toggle('on',x===c)});
     apply(c.dataset.f);
+    document.querySelector('#dockbar .db-f').textContent=c.dataset.f==='all'?'':c.textContent;
   })});
   var dock=document.getElementById('dock'), strip=document.getElementById('index');
   function pinH(){return getComputedStyle(dock).position==='sticky'?dock.offsetHeight:0}
@@ -823,16 +841,25 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
   setH(); addEventListener('resize',setH);
   addEventListener('scroll',function(){dock.classList.toggle('stuck',dock.getBoundingClientRect().top<=1&&scrollY>40)},{passive:true});
   var links={}; [].slice.call(strip.querySelectorAll('.nv')).forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
-  function unmark(){document.querySelectorAll('.nv.cur,.card.cur').forEach(function(e){e.classList.remove('cur')})}
+  var bar=document.getElementById('dockbar'), barIc=bar.querySelector('.db-ic'), barName=bar.querySelector('.db-name');
+  function setBar(a){
+    barIc.innerHTML=a?a.querySelector('.nvi').innerHTML:''; barName.textContent=a?a.querySelector('span:not(.nvi)').textContent:'Jump to a build';
+    bar.className='dockbar'+(a?' '+[].filter.call(a.classList,function(c){return c.indexOf('g-')===0}).join(' '):'');
+  }
+  function openDock(o){dock.classList.toggle('open',o); bar.setAttribute('aria-expanded',o?'true':'false')}
+  bar.addEventListener('click',function(){openDock(!dock.classList.contains('open'))});
+  document.addEventListener('click',function(e){if(!dock.contains(e.target))openDock(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')openDock(false)});
+  function unmark(){document.querySelectorAll('.nv.cur,.card.cur').forEach(function(e){e.classList.remove('cur')}); setBar(null)}
   function mark(id){
     var a=links[id]; if(!a||a.classList.contains('cur'))return;
     unmark();
-    a.classList.add('cur'); document.getElementById(id).classList.add('cur');
+    a.classList.add('cur'); document.getElementById(id).classList.add('cur'); setBar(a);
   }
   // A clicked build stays highlighted until its row is reached (or the user scrolls by hand),
   // so the smooth scroll past other rows doesn't move the highlight.
   var lock=null;
-  strip.addEventListener('click',function(e){var a=e.target.closest('.nv'); if(a){lock=a.getAttribute('href').slice(1); mark(lock)}});
+  strip.addEventListener('click',function(e){var a=e.target.closest('.nv'); if(a){lock=a.getAttribute('href').slice(1); mark(lock); openDock(false)}});
   ['wheel','touchstart','keydown'].forEach(function(t){addEventListener(t,function(){lock=null},{passive:true})});
   function spy(){
     var y=pinH()+40, row=[], top=null;

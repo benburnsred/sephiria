@@ -311,6 +311,8 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
 .legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.85rem;color:var(--mute);margin-top:.8rem}
 .legend b{color:var(--ink);font-weight:700}
 .legend .unl{color:var(--red)}
+.top p.howto{margin-top:.9rem;font-size:.85rem;background:var(--soft);border-radius:10px;padding:10px 12px;max-width:none}
+.howto b{color:var(--ink)}
 .dock{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin-inline:-16px;padding:10px 16px;display:flex;flex-direction:column;gap:8px;background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
 .dock.stuck{border-bottom-color:var(--line)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
@@ -431,6 +433,7 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
    <span><b>Out of combo</b> worth taking outside your combos</span>
    <span class="unl"><b class="unl">Dashed red</b> combo target that most likely won't happen</span>
   </div>
+  <p class="howto"><b>Using presets:</b> press <b>Copy</b> next to a build's preset code, then paste the whole code into Sephiria's preset import field to load that setup. Builds with more than one code are labelled by run (e.g. Harsh Trial), so pick the one that matches yours. If the game rejects a code, check nothing got cut off and that your save has the build's items unlocked.</p>
  </header>
  <div class="dock" id="dock">
   <nav class="chips" aria-label="Filter builds"><button type="button" class="chip on" data-f="all">All</button><button type="button" class="chip" data-f="Artifact">Artifact</button><button type="button" class="chip" data-f="Debuff">Debuff</button><button type="button" class="chip" data-f="Normal Attack">Normal Attack</button><button type="button" class="chip" data-f="Solar Blade">Solar Blade</button><button type="button" class="chip" data-f="Special Attack">Special Attack</button><button type="button" class="chip" data-f="Storm Cloud">Storm Cloud</button><button type="button" class="chip" data-f="Weapon Effect">Weapon Effect</button><button type="button" class="chip five" data-f="5">★★★★★ only</button></nav>

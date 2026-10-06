@@ -825,11 +825,23 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
     for(var k in links)links[k].classList.remove('cur');
     a.classList.add('cur');
   }
+  // A clicked build stays highlighted until its row is reached (or the user scrolls by hand),
+  // so the smooth scroll past other rows doesn't move the highlight.
+  var lock=null;
+  strip.addEventListener('click',function(e){var a=e.target.closest('.nv'); if(a){lock=a.getAttribute('href').slice(1); mark(lock)}});
+  ['wheel','touchstart','keydown'].forEach(function(t){addEventListener(t,function(){lock=null},{passive:true})});
   function spy(){
-    var y=pinH()+40, best=null;
-    document.querySelectorAll('.card:not(.hide)').forEach(function(c){if(c.getBoundingClientRect().top<=y)best=c});
-    if(!best){var f=document.querySelector('.card:not(.hide)');if(f&&f.getBoundingClientRect().top<innerHeight*.6)best=f}
-    if(best)mark(best.id); else for(var k in links)links[k].classList.remove('cur');
+    var y=pinH()+40, row=[], top=null;
+    // Cards side by side share a top; collect the last row that has scrolled under the menu.
+    document.querySelectorAll('.card:not(.hide)').forEach(function(c){
+      var t=Math.round(c.getBoundingClientRect().top);
+      if(t<=y){if(t!==top){top=t;row=[]} row.push(c)}
+    });
+    if(!row.length){var f=document.querySelector('.card:not(.hide)');if(f&&f.getBoundingClientRect().top<innerHeight*.6)row=[f]}
+    if(lock){if(row.some(function(c){return c.id===lock}))lock=null; return}
+    if(!row.length){for(var k in links)links[k].classList.remove('cur'); return}
+    var cur=row.filter(function(c){return links[c.id]&&links[c.id].classList.contains('cur')})[0];
+    mark((cur||row[0]).id);
   }
   addEventListener('scroll',spy,{passive:true}); spy();
   document.querySelectorAll('.copy').forEach(function(btn){

@@ -311,7 +311,10 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
 .legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.85rem;color:var(--mute);margin-top:.8rem}
 .legend b{color:var(--ink);font-weight:700}
 .legend .unl{color:var(--red)}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
+.dock{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin-inline:-16px;padding:10px 16px;display:flex;flex-direction:column;gap:8px;background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
+.dock.stuck{border-bottom-color:var(--line)}
+.chips,.index{display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin;padding-bottom:2px;scroll-behavior:smooth}
+.chip{flex:none;white-space:nowrap}
 .chip{font:600 .85rem var(--f-body);border:1px solid var(--line);background:var(--card);color:var(--ink);padding:.4rem .8rem;border-radius:999px;cursor:pointer}
 .chip:hover{border-color:var(--mute)}
 .chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
@@ -319,9 +322,12 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
 :focus-visible{outline:2px solid var(--frost);outline-offset:2px}
 
 /* index */
-.index{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr));gap:8px}
+.index{gap:6px}
 .nv .nvi{width:34px;height:30px;display:grid;place-items:center;flex:none;overflow:hidden}
-@media (max-width:560px){.index{grid-template-columns:1fr 1fr;gap:6px}.nv small{display:none}.nv span{font-size:.8rem;white-space:normal}}
+@media (max-width:560px){.nv small{display:none}.nv span{font-size:.82rem}.chip{padding:.3rem .65rem;font-size:.8rem}}
+.nv{flex:none}
+.nv.cur{background:var(--band);border-color:var(--band);color:#14162a}
+.nv.cur small{color:#14162a}
 .nv{display:flex;align-items:center;gap:10px;padding:6px 10px 6px 6px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--band);border-radius:8px;color:var(--ink);text-decoration:none;min-width:0}
 .nv:hover{border-color:var(--band)}
 .nv .ic{transform:scale(.7);margin:-6px -8px}
@@ -331,7 +337,7 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
 
 /* cards */
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,540px),1fr));gap:20px;align-items:start}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:16px;scroll-margin-top:16px;min-width:0;position:relative;overflow:hidden}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:16px;scroll-margin-top:var(--dockh,130px);min-width:0;position:relative;overflow:hidden}
 .card::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:var(--band)}
 .ch{display:flex;gap:14px;align-items:center}
 .kit{display:flex;gap:6px}
@@ -352,15 +358,15 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
 
 .tal{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
 .st{display:flex;flex-direction:column;align-items:center;padding:6px 2px 4px;border-radius:8px;background:color-mix(in srgb,var(--c) 16%,var(--card));border:1px solid color-mix(in srgb,var(--c) 45%,transparent)}
-.st .sv{font:700 1.35rem/1 var(--f-disp);color:var(--c);font-variant-numeric:tabular-nums}
-.st .sn{font-size:.66rem;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);margin-top:3px}
+.st .sv{font:700 1.3rem/1 var(--f-body);color:var(--c);font-variant-numeric:tabular-nums}
+.st .sn{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);margin-top:3px}
 .st.zero{background:transparent;border:1px dashed var(--line)}
 .st.zero .sv{color:var(--line)}
 .s-wrath{--c:var(--wrath)} .s-swiftness{--c:var(--swift)} .s-survival{--c:var(--surv)} .s-endurance{--c:var(--endu)} .s-wisdom{--c:var(--wis)} .s-willpower{--c:var(--will)} .s-ingeniosity{--c:var(--ingen)}
 
 .row3{display:grid;grid-template-columns:auto auto 1fr;gap:12px 22px}
 .fr{display:flex;flex-wrap:wrap;gap:8px}
-.fruit{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:.78rem;font-variant-numeric:tabular-nums}
+.fruit{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:.88rem;font-variant-numeric:tabular-nums}
 .fruit .lbl{font-weight:700;font-size:.7rem;color:var(--mute)}
 
 .arts{display:flex;flex-direction:column;gap:6px}
@@ -373,7 +379,7 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
 .tiles{display:flex;flex-wrap:wrap;gap:6px}
 
 .combos{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px;counter-reset:c}
-.combo{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:.8rem;font-variant-numeric:tabular-nums;position:relative;padding:4px 4px 2px;border-radius:10px}
+.combo{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:.9rem;font-variant-numeric:tabular-nums;position:relative;padding:4px 4px 2px;border-radius:10px}
 .combo + .combo::before{content:"›";position:absolute;left:-7px;top:16px;color:var(--mute);font-size:.9rem}
 .combo.unlikely .tile{outline:2px dashed var(--red);outline-offset:1px;opacity:.6}
 .combo.unlikely b{color:var(--red)}
@@ -424,8 +430,10 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
    <span class="unl"><b class="unl">Dashed red</b> combo target that most likely won't happen</span>
   </div>
  </header>
- <nav class="chips" aria-label="Filter builds"><button type="button" class="chip on" data-f="all">All</button><button type="button" class="chip" data-f="Artifact">Artifact</button><button type="button" class="chip" data-f="Debuff">Debuff</button><button type="button" class="chip" data-f="Normal Attack">Normal Attack</button><button type="button" class="chip" data-f="Solar Blade">Solar Blade</button><button type="button" class="chip" data-f="Special Attack">Special Attack</button><button type="button" class="chip" data-f="Storm Cloud">Storm Cloud</button><button type="button" class="chip" data-f="Weapon Effect">Weapon Effect</button><button type="button" class="chip five" data-f="5">★★★★★ only</button></nav>
- <nav class="index" aria-label="Jump to build"><a href="#star-platinum" class="nv g-steel" data-dmg="Artifact" data-stars="4"><span class="nvi"><i class="ic i0" aria-hidden="true"></i></span><span>Star Platinum</span><small>★★★★</small></a><a href="#machine-gun" class="nv g-steel" data-dmg="Special Attack" data-stars="5"><span class="nvi"><i class="ic i22" aria-hidden="true"></i></span><span>Machine Gun</span><small>★★★★★</small></a><a href="#spike-club" class="nv g-steel" data-dmg="Normal Attack" data-stars="4"><span class="nvi"><i class="ic i35" aria-hidden="true"></i></span><span>Spike Club</span><small>★★★★</small></a><a href="#sacred-jar" class="nv g-steel" data-dmg="Normal Attack" data-stars="4"><span class="nvi"><i class="ic i40" aria-hidden="true"></i></span><span>Sacred Jar</span><small>★★★★</small></a><a href="#solar-gun" class="nv g-sun" data-dmg="Solar Blade" data-stars="5"><span class="nvi"><i class="ic i45" aria-hidden="true"></i></span><span>Solar Gun</span><small>★★★★★</small></a><a href="#ilonica-staff" class="nv g-sun" data-dmg="Solar Blade" data-stars="5"><span class="nvi"><i class="ic i58" aria-hidden="true"></i></span><span>Ilonica Staff</span><small>★★★★★</small></a><a href="#liberation" class="nv g-sun" data-dmg="Special Attack" data-stars="4"><span class="nvi"><i class="ic i67" aria-hidden="true"></i></span><span>Liberation</span><small>★★★★</small></a><a href="#blizzard-s-eve" class="nv g-frost" data-dmg="Artifact" data-stars="5"><span class="nvi"><i class="ic i78" aria-hidden="true"></i></span><span>Blizzard&#x27;s Eve</span><small>★★★★★</small></a><a href="#frost-gun" class="nv g-frost" data-dmg="Normal Attack" data-stars="4"><span class="nvi"><i class="ic i89" aria-hidden="true"></i></span><span>Frost Gun</span><small>★★★★</small></a><a href="#frozen-smelt" class="nv g-frost" data-dmg="Debuff" data-stars="4"><span class="nvi"><i class="ic i95" aria-hidden="true"></i></span><span>Frozen Smelt</span><small>★★★★</small></a><a href="#blinding-silence" class="nv g-storm" data-dmg="Debuff" data-stars="5"><span class="nvi"><i class="ic i104" aria-hidden="true"></i></span><span>Blinding Silence</span><small>★★★★★</small></a><a href="#cloud-9" class="nv g-storm" data-dmg="Storm Cloud" data-stars="4"><span class="nvi"><i class="ic i116" aria-hidden="true"></i></span><span>Cloud 9</span><small>★★★★</small></a><a href="#boomerangs" class="nv g-storm" data-dmg="Artifact" data-stars="5"><span class="nvi"><i class="ic i124" aria-hidden="true"></i></span><span>Boomerangs</span><small>★★★★★</small></a><a href="#adamah-s-oath" class="nv g-arcane" data-dmg="Weapon Effect" data-stars="5"><span class="nvi"><i class="ic i133" aria-hidden="true"></i></span><span>Adamah&#x27;s Oath</span><small>★★★★★</small></a><a href="#crystal-shard" class="nv g-arcane" data-dmg="Special Attack" data-stars="4"><span class="nvi"><i class="ic i138" aria-hidden="true"></i></span><span>Crystal Shard</span><small>★★★★</small></a><a href="#magic-wand" class="nv g-arcane" data-dmg="Special Attack" data-stars="4"><span class="nvi"><i class="ic i145" aria-hidden="true"></i></span><span>Magic Wand</span><small>★★★★</small></a></nav>
+ <div class="dock" id="dock">
+  <nav class="chips" aria-label="Filter builds"><button type="button" class="chip on" data-f="all">All</button><button type="button" class="chip" data-f="Artifact">Artifact</button><button type="button" class="chip" data-f="Debuff">Debuff</button><button type="button" class="chip" data-f="Normal Attack">Normal Attack</button><button type="button" class="chip" data-f="Solar Blade">Solar Blade</button><button type="button" class="chip" data-f="Special Attack">Special Attack</button><button type="button" class="chip" data-f="Storm Cloud">Storm Cloud</button><button type="button" class="chip" data-f="Weapon Effect">Weapon Effect</button><button type="button" class="chip five" data-f="5">★★★★★ only</button></nav>
+  <nav class="index" id="index" aria-label="Jump to build"><a href="#star-platinum" class="nv g-steel" data-dmg="Artifact" data-stars="4"><span class="nvi"><i class="ic i0" aria-hidden="true"></i></span><span>Star Platinum</span><small>★★★★</small></a><a href="#machine-gun" class="nv g-steel" data-dmg="Special Attack" data-stars="5"><span class="nvi"><i class="ic i22" aria-hidden="true"></i></span><span>Machine Gun</span><small>★★★★★</small></a><a href="#spike-club" class="nv g-steel" data-dmg="Normal Attack" data-stars="4"><span class="nvi"><i class="ic i35" aria-hidden="true"></i></span><span>Spike Club</span><small>★★★★</small></a><a href="#sacred-jar" class="nv g-steel" data-dmg="Normal Attack" data-stars="4"><span class="nvi"><i class="ic i40" aria-hidden="true"></i></span><span>Sacred Jar</span><small>★★★★</small></a><a href="#solar-gun" class="nv g-sun" data-dmg="Solar Blade" data-stars="5"><span class="nvi"><i class="ic i45" aria-hidden="true"></i></span><span>Solar Gun</span><small>★★★★★</small></a><a href="#ilonica-staff" class="nv g-sun" data-dmg="Solar Blade" data-stars="5"><span class="nvi"><i class="ic i58" aria-hidden="true"></i></span><span>Ilonica Staff</span><small>★★★★★</small></a><a href="#liberation" class="nv g-sun" data-dmg="Special Attack" data-stars="4"><span class="nvi"><i class="ic i67" aria-hidden="true"></i></span><span>Liberation</span><small>★★★★</small></a><a href="#blizzard-s-eve" class="nv g-frost" data-dmg="Artifact" data-stars="5"><span class="nvi"><i class="ic i78" aria-hidden="true"></i></span><span>Blizzard&#x27;s Eve</span><small>★★★★★</small></a><a href="#frost-gun" class="nv g-frost" data-dmg="Normal Attack" data-stars="4"><span class="nvi"><i class="ic i89" aria-hidden="true"></i></span><span>Frost Gun</span><small>★★★★</small></a><a href="#frozen-smelt" class="nv g-frost" data-dmg="Debuff" data-stars="4"><span class="nvi"><i class="ic i95" aria-hidden="true"></i></span><span>Frozen Smelt</span><small>★★★★</small></a><a href="#blinding-silence" class="nv g-storm" data-dmg="Debuff" data-stars="5"><span class="nvi"><i class="ic i104" aria-hidden="true"></i></span><span>Blinding Silence</span><small>★★★★★</small></a><a href="#cloud-9" class="nv g-storm" data-dmg="Storm Cloud" data-stars="4"><span class="nvi"><i class="ic i116" aria-hidden="true"></i></span><span>Cloud 9</span><small>★★★★</small></a><a href="#boomerangs" class="nv g-storm" data-dmg="Artifact" data-stars="5"><span class="nvi"><i class="ic i124" aria-hidden="true"></i></span><span>Boomerangs</span><small>★★★★★</small></a><a href="#adamah-s-oath" class="nv g-arcane" data-dmg="Weapon Effect" data-stars="5"><span class="nvi"><i class="ic i133" aria-hidden="true"></i></span><span>Adamah&#x27;s Oath</span><small>★★★★★</small></a><a href="#crystal-shard" class="nv g-arcane" data-dmg="Special Attack" data-stars="4"><span class="nvi"><i class="ic i138" aria-hidden="true"></i></span><span>Crystal Shard</span><small>★★★★</small></a><a href="#magic-wand" class="nv g-arcane" data-dmg="Special Attack" data-stars="4"><span class="nvi"><i class="ic i145" aria-hidden="true"></i></span><span>Magic Wand</span><small>★★★★</small></a></nav>
+ </div>
  <main class="cards">
 <article class="card g-steel" id="star-platinum" data-dmg="Artifact" data-stars="4">
  <header class="ch">
@@ -796,6 +804,25 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
     chips.forEach(function(x){x.classList.toggle('on',x===c)});
     apply(c.dataset.f);
   })});
+  var dock=document.getElementById('dock'), strip=document.getElementById('index');
+  function setH(){document.documentElement.style.setProperty('--dockh',(dock.offsetHeight+12)+'px')}
+  setH(); addEventListener('resize',setH);
+  addEventListener('scroll',function(){dock.classList.toggle('stuck',dock.getBoundingClientRect().top<=1&&scrollY>40)},{passive:true});
+  var links={}; [].slice.call(strip.querySelectorAll('.nv')).forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
+  function mark(id){
+    var a=links[id]; if(!a||a.classList.contains('cur'))return;
+    for(var k in links)links[k].classList.remove('cur');
+    a.classList.add('cur');
+    var l=a.offsetLeft-strip.offsetLeft, r=l+a.offsetWidth;
+    if(l<strip.scrollLeft||r>strip.scrollLeft+strip.clientWidth)strip.scrollLeft=l-(strip.clientWidth-a.offsetWidth)/2;
+  }
+  function spy(){
+    var y=dock.offsetHeight+40, best=null;
+    document.querySelectorAll('.card:not(.hide)').forEach(function(c){if(c.getBoundingClientRect().top<=y)best=c});
+    if(!best){var f=document.querySelector('.card:not(.hide)');if(f&&f.getBoundingClientRect().top<innerHeight*.6)best=f}
+    if(best)mark(best.id); else for(var k in links)links[k].classList.remove('cur');
+  }
+  addEventListener('scroll',spy,{passive:true}); spy();
   document.querySelectorAll('.copy').forEach(function(btn){
     btn.addEventListener('click',function(){
       var el=document.getElementById(btn.dataset.t), txt=el.textContent;

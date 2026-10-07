@@ -1064,7 +1064,7 @@ Normal Attack has a 20% chance to summon a Carrot Soldier."><i class="ic w11" ar
     pipPh=document.createElement('div'); pipPh.style.height=card.offsetHeight+'px'; card.before(pipPh);
     pipWin.document.body.appendChild(card); pipCard=card; setPip(card,true); pipWin.document.title=card.querySelector('h2').textContent;
   }
-  document.querySelectorAll('.pip').forEach(function(b){b.addEventListener('click',function(){var c=b.closest('.card'); if(c===pipCard)pipWin.close(); else openPip(c).catch(function(){})})});
+  document.querySelectorAll('.pip').forEach(function(b){b.addEventListener('click',function(){var c=b.closest('.card'); if(c===pipCard)pipWin.close(); else openPip(c).catch(function(){document.documentElement.classList.remove('can-pip')})})});
 })();
 </script>
 </body></html>

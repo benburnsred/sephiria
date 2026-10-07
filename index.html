@@ -358,6 +358,18 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:16px;scroll-margin-top:var(--dockh,130px);min-width:0;position:relative;overflow:hidden}
 .card{transition:box-shadow .2s,border-color .2s}
 .card.cur{border-color:var(--band);box-shadow:0 0 0 2px var(--band),0 10px 28px color-mix(in srgb,var(--band) 30%,transparent)}
+.hrow{display:flex;align-items:center;gap:6px;min-width:0}
+.cpname,.maxi{flex:none;display:inline-grid;place-items:center;width:30px;height:30px;padding:0;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--mute);cursor:pointer;transition:color .15s,border-color .15s}
+.cpname:hover,.maxi:hover{color:var(--ink);border-color:var(--mute)}
+.cpname.ok{color:var(--will);border-color:var(--will)}
+.maxi{position:absolute;top:14px;right:14px;z-index:1}
+.card .ch{padding-right:34px}
+#focus{border:0;padding:0;background:transparent;color:inherit;width:min(1000px,100vw - 32px);max-width:none;max-height:calc(100dvh - 32px);overflow:auto;overscroll-behavior:contain}
+#focus::backdrop{background:rgb(8 10 22/.72);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+#focus .card{margin:0;box-shadow:0 20px 60px rgb(0 0 0/.45)}
+@media (min-width:900px){#focus .card{zoom:1.18}}
+@media (max-width:720px){#focus{width:100vw;max-height:100dvh;height:100dvh;margin:0}#focus .card{min-height:100%;border-radius:0}}
+html:has(#focus[open]){overflow:hidden}
 .card::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:var(--band)}
 .ch{display:flex;gap:14px;align-items:center}
 .kit{display:flex;gap:6px}
@@ -466,11 +478,12 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
  </div>
  <main class="cards">
 <article class="card g-steel" id="star-platinum" data-dmg="Artifact" data-stars="4">
+ <button type="button" class="maxi" aria-label="Open in focus view" title="Focus view"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
  <header class="ch">
   <div class="kit"><span class="tile big" tabindex="0" role="img" aria-label="Adonis (Weapon)" data-tip="Adonis" data-kind="Weapon"><i class="ic i0" aria-hidden="true"></i></span><span class="tile big" tabindex="0" role="img" aria-label="Three-Tailed Fox (Costume)" data-tip="Three-Tailed Fox" data-kind="Costume"><i class="ic i1" aria-hidden="true"></i></span></div>
   <div class="ttl">
    <div class="meta"><span class="stars" aria-label="4 out of 5">★★★★<span class="off">★</span></span><span class="new">New</span><span class="band">Steel</span></div>
-   <h2>Star Platinum</h2>
+   <div class="hrow"><h2>Star Platinum</h2><button type="button" class="cpname" aria-label="Copy build name" title="Copy build name"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
    <p class="dmg">Artifact <span>· +normal Attack</span></p>
   </div>
  </header>
@@ -488,11 +501,12 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
  <section class="blk pres"><div class="preset"><span class="plab">Adonis/Dark Veil</span><code id="p-star-platinum-0">AAF_PRESET_OBFZ|v1Xuh8aW9uQW5pZzzj+w+xXVz2EnIfZ1p4yE0v0ufBaN9M77JMqXZtnLvZyT7sy/K5YoIdSAGPkjizl15+Kk2Jk5INjLBMvkK5pZG9uhMO7wcdDcaKMtpIABhnZbLuAsh+wz1daOju9UNkKBIrtV4wJVSIchp3SrBx8qd4gUNL1WzdbUUrygXcbHA19OnurPUof2HlJnTYzGIcZBbDYTpy+TSPzt1I/VGfIw8kx+cksUBzXskVIm91fEAv6a47HQ/CdqJFo0XDA56sBWtd4ZLTLY/nMeWWjaibewiku46fdIzFiA2HEAjeuKgUOozYtD2PzqwZk62KbgD5BSvcR2Fy</code><button type="button" class="copy" data-t="p-star-platinum-0">Copy</button></div><div class="preset"><span class="plab">Harsh Trial</span><code id="p-star-platinum-1">AAF_PRESET_OBFZ|v1Xuh8aW9uQW5pZzz8dwqxXUT2EvKb/VYS815YYvbwWvnRWBkliXYr0ReBiY7v38RcepSCz7C4VV8HhtB8Lq7F9NER7bfz4xMjI76vjikl8tGJOsxR2pYuVtBFN7IcpMbnthB5QnxmYkOBXkfSEScl8dtsDnj6M5lpCCN8KUlE8w/tZ+TGZnfXY6Enevut4pnWW1BUCeDhKY287X3GTmQiiSlY9rhBvDOCLDLwyPWdOpPp9eV8i+H0vjY0W+xWOSOE8AccYxJgd3SyMxEx0sSINv9WFj/jnIIWn6D+4h4WvZ0oiottBL5KbIqUHfZkS2U=</code><button type="button" class="copy" data-t="p-star-platinum-1">Copy</button></div></section>
 </article>
 <article class="card g-steel" id="machine-gun" data-dmg="Special Attack" data-stars="5">
+ <button type="button" class="maxi" aria-label="Open in focus view" title="Focus view"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
  <header class="ch">
   <div class="kit"><span class="tile big" tabindex="0" role="img" aria-label="Minigun (Weapon)" data-tip="Minigun" data-kind="Weapon"><i class="ic i22" aria-hidden="true"></i></span><span class="tile big" tabindex="0" role="img" aria-label="White Rabbit (Costume)" data-tip="White Rabbit" data-kind="Costume"><i class="ic i23" aria-hidden="true"></i></span></div>
   <div class="ttl">
    <div class="meta"><span class="stars" aria-label="5 out of 5">★★★★★<span class="off"></span></span><span class="band">Steel</span></div>
-   <h2>Machine Gun</h2>
+   <div class="hrow"><h2>Machine Gun</h2><button type="button" class="cpname" aria-label="Copy build name" title="Copy build name"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
    <p class="dmg">Special Attack</p>
   </div>
  </header>
@@ -510,11 +524,12 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
  <section class="blk pres"><div class="preset"><span class="plab">Preset</span><code id="p-machine-gun-0">AAF_PRESET_OBFZ|v1Xuh8aW9uQW5pZzz8DWqwXUD2ivKZ51uxxQuTH4/SRtbA4xc6UZqHkqZ1++nl4smcixcNo97KtMvv/j+MtJ8M14G9tBgS09X27TcZI/xzZ1Mx5tLu6cZUSoz6Qwc7uQnCyate5G9E0HFRo3G4HH85xlfOPxpuZPWe/gxMSMdSAhcCJgEmQmPREVO3cTrR3XJK4EGqqa37TD99VSTm06JBopf1P0BjAUCq5bb4UGWt3msOKCfizNAZ6H/vkwQweqmswKC4OSevA0vLjv75F+4ztlV2xp7r9+DJKBeQfDvRR8fv3w8PZHNl</code><button type="button" class="copy" data-t="p-machine-gun-0">Copy</button></div></section>
 </article>
 <article class="card g-steel" id="spike-club" data-dmg="Normal Attack" data-stars="4">
+ <button type="button" class="maxi" aria-label="Open in focus view" title="Focus view"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
  <header class="ch">
   <div class="kit"><span class="tile big" tabindex="0" role="img" aria-label="Spike Club (Weapon)" data-tip="Spike Club" data-kind="Weapon"><i class="ic i35" aria-hidden="true"></i></span><span class="tile big" tabindex="0" role="img" aria-label="Oink the Wanderer (Costume)" data-tip="Oink the Wanderer" data-kind="Costume"><i class="ic i36" aria-hidden="true"></i></span></div>
   <div class="ttl">
    <div class="meta"><span class="stars" aria-label="4 out of 5">★★★★<span class="off">★</span></span><span class="band">Steel</span></div>
-   <h2>Spike Club</h2>
+   <div class="hrow"><h2>Spike Club</h2><button type="button" class="cpname" aria-label="Copy build name" title="Copy build name"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
    <p class="dmg">Normal Attack</p>
   </div>
  </header>
@@ -532,11 +547,12 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
  <section class="blk pres"><div class="preset"><span class="plab">Preset</span><code id="p-spike-club-0">AAF_PRESET_OBFZ|v1Xuh8aW9uQW5pZzzjiy+2XVz2iuKXUt58posWMT8UQJamxDW+yw0sFmOtw5Zl89pxh4GsaiiuqJdX2FCOB73uAjSxzuGKloq/3NQDpOsmHwCHTelASMmvOhZirDjgSt6ChPQuGBuzb0tSZxJn9/HWVvGlJCMrK8C7EHok5A9Ny+R5bZQ+wjdznNA8ZuEmpWWoqlZ4qP974GLzcc58QWx5SHgVfMHWNzA28GBspHqLamjGJuHvMUCX8/NYRXo9eMB5bXhdIFW5sOncHc2HxHnbbDcjclczGQckroaexrdAq188rirp+yf649SD2fzSojrEf9xYqoTxg/R2eZvO/chzbVA=</code><button type="button" class="copy" data-t="p-spike-club-0">Copy</button></div></section>
 </article>
 <article class="card g-steel" id="sacred-jar" data-dmg="Normal Attack" data-stars="4">
+ <button type="button" class="maxi" aria-label="Open in focus view" title="Focus view"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
  <header class="ch">
   <div class="kit"><span class="tile big" tabindex="0" role="img" aria-label="Sacred Jar (Weapon)" data-tip="Sacred Jar" data-kind="Weapon"><i class="ic i40" aria-hidden="true"></i></span><span class="tile big" tabindex="0" role="img" aria-label="Black Bone Skeleton (Costume)" data-tip="Black Bone Skeleton" data-kind="Costume"><i class="ic i41" aria-hidden="true"></i></span></div>
   <div class="ttl">
    <div class="meta"><span class="stars" aria-label="4 out of 5">★★★★<span class="off">★</span></span><span class="band">Steel</span></div>
-   <h2>Sacred Jar</h2>
+   <div class="hrow"><h2>Sacred Jar</h2><button type="button" class="cpname" aria-label="Copy build name" title="Copy build name"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
    <p class="dmg">Normal Attack</p>
   </div>
  </header>
@@ -554,11 +570,12 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
  <section class="blk pres"><div class="preset"><span class="plab">Preset</span><code id="p-sacred-jar-0">AAF_PRESET_OBFZ|v1Xuh8aW9uQW5pZzzj9y+2XUA2Hjib5xeaz8/TnMw3ViMdG75rNcyN47Hs5oCNqB425Bv7srCxOIkVE63CCvBk1VTYtBOStd/TeNwpdhlUvAGNn7glm9YKnJtjGBjl9SaNikNMm4/SF2nTXvjzz/KgZOBJgOru6ok55UEoSm8hrCbxSAesIEiwJqBY1TTx9Id5AnVyuH180Nf/sQQufA0MKdxeBmE4WPOmSzupl9vC0zFl8OiBxrasWK6tSjbZRSZsPRRdLQXzz9vKfFTUP2OsGzdJGnLdt0JDNFy946LMYOk+FGfE+w0an47RPNQcFyqKAiS3G9FVD4Ud956Fs5CbUW6NdK2YdJIvYOqkSmV5</code><button type="button" class="copy" data-t="p-sacred-jar-0">Copy</button></div></section>
 </article>
 <article class="card g-sun" id="solar-gun" data-dmg="Solar Blade" data-stars="5">
+ <button type="button" class="maxi" aria-label="Open in focus view" title="Focus view"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
  <header class="ch">
   <div class="kit"><span class="tile big" tabindex="0" role="img" aria-label="Solis Iubar (Weapon)" data-tip="Solis Iubar" data-kind="Weapon"><i class="ic i45" aria-hidden="true"></i></span><span class="tile big" tabindex="0" role="img" aria-label="Red-Clothed Cat (Costume)" data-tip="Red-Clothed Cat" data-kind="Costume"><i class="ic i46" aria-hidden="true"></i></span></div>
   <div class="ttl">
    <div class="meta"><span class="stars" aria-label="5 out of 5">★★★★★<span class="off"></span></span><span class="band">Sun & Fire</span></div>
-   <h2>Solar Gun</h2>
+   <div class="hrow"><h2>Solar Gun</h2><button type="button" class="cpname" aria-label="Copy build name" title="Copy build name"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
    <p class="dmg">Solar Blade</p>
   </div>
  </header>
@@ -576,11 +593,12 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
  <section class="blk pres"><div class="preset"><span class="plab">Preset</span><code id="p-solar-gun-0">AAF_PRESET_OBFZ|v1Xuh8aW9uQW5pZzziiwuxXUD2inHY/VbTm8MBrgFlWGE6C4Msj2Qgzbb+sUZJz8eEl0K/qUqlWdzJnkhK0DUn99AR3z0UBtQL+JplqEp+QMGjo7MlHKCudzfTPMPzzk/4WKDIDoNItiFtaOF1/7FT/cEr4MclW5EpSAmU50IVwBtpOfUPgYMH9WkDXY9ENM37eLMjSGfFfVpUrFoBAm7N6wqTPK1wbEKy1PZXFIJnplPEAA5JYWmzx+o0QWVOFLdPaUTfu8xILvRkFMe5i+potLtk2yEPxNlSbo3QgdaHMPW/8pfI8JrR6/3/HshJrjlXHoD26WDPc3r/xWBsRg==</code><button type="button" class="copy" data-t="p-solar-gun-0">Copy</button></div></section>
 </article>
 <article class="card g-sun" id="ilonica-staff" data-dmg="Solar Blade" data-stars="5">
+ <button type="button" class="maxi" aria-label="Open in focus view" title="Focus view"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
  <header class="ch">
   <div class="kit"><span class="tile big" tabindex="0" role="img" aria-label="Ilonica&#x27;s Spirit Staff (Weapon)" data-tip="Ilonica&#x27;s Spirit Staff" data-kind="Weapon"><i class="ic i58" aria-hidden="true"></i></span><span class="tile big" tabindex="0" role="img" aria-label="Red-Clothed Cat (Costume)" data-tip="Red-Clothed Cat" data-kind="Costume"><i class="ic i46" aria-hidden="true"></i></span></div>
   <div class="ttl">
    <div class="meta"><span class="stars" aria-label="5 out of 5">★★★★★<span class="off"></span></span><span class="band">Sun & Fire</span></div>
-   <h2>Ilonica Staff</h2>
+   <div class="hrow"><h2>Ilonica Staff</h2><button type="button" class="cpname" aria-label="Copy build name" title="Copy build name"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
    <p class="dmg">Solar Blade</p>
   </div>
  </header>
@@ -598,11 +616,12 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
  <section class="blk pres"><div class="preset"><span class="plab">Preset</span><code id="p-ilonica-staff-0">AAF_PRESET_OBFZ|v1Xuh8aW9uQW5pZzT8DQqxLVz2inWaZ0icuS8OnEKaRmfur1fpkc0qf4nZsp4h4LlX8nxsud/cWn5OnLDUBcHOc6ScvJ11mr7W/HfM6kcHHh+sPInYpqKLBB/MTtBJLBVqywAwZ3I3hXXyuWnIYW8wAss/LZZ1OkG540AHqq2vkJc9tKRGV0hzMxhgZjQA+cFINadkZAB1YzFgZ5xurk+nJS8kMEnkRpFjuLhkX3BpsW8CL6R8mbVdp3+KOPrhLAZUEbCwzKCY1CRleEezYywMHTISSC6YxH6E8nl3QZ87FQiLMgolPipb8qAU3C/T4oSH7HqyCPWhHgG816yPrxvIEZKOYlOp2/neYHJl</code><button type="button" class="copy" data-t="p-ilonica-staff-0">Copy</button></div></section>
 </article>
 <article class="card g-sun" id="liberation" data-dmg="Special Attack" data-stars="4">
+ <button type="button" class="maxi" aria-label="Open in focus view" title="Focus view"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
  <header class="ch">
   <div class="kit"><span class="tile big" tabindex="0" role="img" aria-label="Academy Magic Sword - Liberation (Weapon)" data-tip="Academy Magic Sword - Liberation" data-kind="Weapon"><i class="ic i67" aria-hidden="true"></i></span><span class="tile big" tabindex="0" role="img" aria-label="Red-Hooded Rabbit (Costume)" data-tip="Red-Hooded Rabbit" data-kind="Costume"><i class="ic i68" aria-hidden="true"></i></span></div>
   <div class="ttl">
    <div class="meta"><span class="stars" aria-label="4 out of 5">★★★★<span class="off">★</span></span><span class="band">Sun & Fire</span></div>
-   <h2>Liberation</h2>
+   <div class="hrow"><h2>Liberation</h2><button type="button" class="cpname" aria-label="Copy build name" title="Copy build name"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
    <p class="dmg">Special Attack <span>· Liberation</span></p>
   </div>
  </header>
@@ -620,11 +639,12 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
  <section class="blk pres"><div class="preset"><span class="plab">Preset</span><code id="p-liberation-0">AAF_PRESET_OBFZ|v1Xuh8aW9uQW5pZzz8+w+xXVz2EnAbZ1pIyA0cefdtSDlA71IKz/1xZTHMDfbMECkYwn2bCGGhWiiGcxSmHMkktoKEvdZ2Ul7SoYrIU++IC9oRqe/jhV+0/T8Gtqra8P1D6AKsapbUwzqt0ARUlzV0YM99f3olb0VQE2fuQ+WCQXLam4jcBCVj2ZBjTzEAQbaq5/dQCHd4GxPYRyHaa8vwa4IShbA+aDPQdp8FazOIET414jw8YWDEq2mEwav4hrB+1jdQYbDlv73tsOxZd2W0QPnTdgK8k3tNdV5yMYnSnPfYjhMhx0IYQ4TfkIfFlJsnkh+s9Pm9uJP2M++PuB2zqV8exND10lJoYQ==</code><button type="button" class="copy" data-t="p-liberation-0">Copy</button></div><p class="credit">Build credit: @Kuren</p></section>
 </article>
 <article class="card g-frost" id="blizzard-s-eve" data-dmg="Artifact" data-stars="5">
+ <button type="button" class="maxi" aria-label="Open in focus view" title="Focus view"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
  <header class="ch">
   <div class="kit"><span class="tile big" tabindex="0" role="img" aria-label="Blizzard&#x27;s Eve (Weapon)" data-tip="Blizzard&#x27;s Eve" data-kind="Weapon"><i class="ic i78" aria-hidden="true"></i></span><span class="tile big" tabindex="0" role="img" aria-label="Wizard Bunny (Costume)" data-tip="Wizard Bunny" data-kind="Costume"><i class="ic i79" aria-hidden="true"></i></span></div>
   <div class="ttl">
    <div class="meta"><span class="stars" aria-label="5 out of 5">★★★★★<span class="off"></span></span><span class="band">Frost</span></div>
-   <h2>Blizzard&#x27;s Eve</h2>
+   <div class="hrow"><h2>Blizzard&#x27;s Eve</h2><button type="button" class="cpname" aria-label="Copy build name" title="Copy build name"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
    <p class="dmg">Artifact <span>· Ice Droplet</span></p>
   </div>
  </header>
@@ -642,11 +662,12 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
  <section class="blk pres"><div class="preset"><span class="plab">Preset</span><code id="p-blizzard-s-eve-0">AAF_PRESET_OBFZ|v1Xuh8aW9uQW5pZzzji+twXED2ivLZ/dIcRuuZM38lVDIscHhSZqhowupL2b/crMPlSqb42gcPfb3BntAh7FWRkxe7vlC8u38j608XgyPdzBYWG2Re/95WorPqKNq7FcDfxz7ct3Te0DZwYlRzXvJG9RzqoHCNRjRpVgc1eypCH6xEqGAsaejxwCjrxc+RTNkaZSkhDWuJC0dN8Ezhcw6xFG1jRn8y/eOqRVOml0UzECpTQzVREiUMv4UyveSEV2LoeQmHPlwPsysmWdgDVOe2M7kzLlSJN5GKvUSeyhAfni9qEFOYybeLHFJoYQ==</code><button type="button" class="copy" data-t="p-blizzard-s-eve-0">Copy</button></div></section>
 </article>
 <article class="card g-frost" id="frost-gun" data-dmg="Normal Attack" data-stars="4">
+ <button type="button" class="maxi" aria-label="Open in focus view" title="Focus view"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
  <header class="ch">
   <div class="kit"><span class="tile big" tabindex="0" role="img" aria-label="Colossal Crossbow: Rapid Freeze Crystal (Weapon)" data-tip="Colossal Crossbow: Rapid Freeze Crystal" data-kind="Weapon"><i class="ic i89" aria-hidden="true"></i></span><span class="tile big" tabindex="0" role="img" aria-label="Wizard Bunny (Costume)" data-tip="Wizard Bunny" data-kind="Costume"><i class="ic i79" aria-hidden="true"></i></span></div>
   <div class="ttl">
    <div class="meta"><span class="stars" aria-label="4 out of 5">★★★★<span class="off">★</span></span><span class="band">Frost</span></div>
-   <h2>Frost Gun</h2>
+   <div class="hrow"><h2>Frost Gun</h2><button type="button" class="cpname" aria-label="Copy build name" title="Copy build name"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
    <p class="dmg">Normal Attack</p>
   </div>
  </header>
@@ -664,11 +685,12 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
  <section class="blk pres"><div class="preset"><span class="plab">Preset</span><code id="p-frost-gun-0">AAF_PRESET_OBFZ|v1Xuh8aW9uQW5pZzzjhwu2XVw2inWaPVH+fVXXvHGr9WemBKd4t4IFW9G7lDLN00rFNZuAVRhbQtmKXNef26tNAukaPBKM4hyhnZeK2bbg6469xz/Z3x1S5X4L//WvR5p4tu2G1KpNIgrsDLc4dGZB/lUAfJLkBbTMAcrUemNqDj9Y3Gd8YmV7GLj7Zicp5XkKs1XWTH885iw7U5rLVg2MEvffzPw1UTxcY34NSNNCQUZFhEb8WTJRRm+UQoH5gYFhg+dbAUwGfsTnGUschHa9EcF9vXrD+OdbCvzjsEhuwk0Z8wI/2uF23iHWVBkf0p4YWzQZljqle2C6CBtXucq1FCxvqpyYeLhf+dEtLKV4QWM=</code><button type="button" class="copy" data-t="p-frost-gun-0">Copy</button></div></section>
 </article>
 <article class="card g-frost" id="frozen-smelt" data-dmg="Debuff" data-stars="4">
+ <button type="button" class="maxi" aria-label="Open in focus view" title="Focus view"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
  <header class="ch">
   <div class="kit"><span class="tile big" tabindex="0" role="img" aria-label="Frozen Smelt (Weapon)" data-tip="Frozen Smelt" data-kind="Weapon"><i class="ic i95" aria-hidden="true"></i></span><span class="tile big" tabindex="0" role="img" aria-label="Scholar Pig (Costume)" data-tip="Scholar Pig" data-kind="Costume"><i class="ic i96" aria-hidden="true"></i></span></div>
   <div class="ttl">
    <div class="meta"><span class="stars" aria-label="4 out of 5">★★★★<span class="off">★</span></span><span class="band">Frost</span></div>
-   <h2>Frozen Smelt</h2>
+   <div class="hrow"><h2>Frozen Smelt</h2><button type="button" class="cpname" aria-label="Copy build name" title="Copy build name"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
    <p class="dmg">Debuff <span>· Freeze</span></p>
   </div>
  </header>
@@ -686,11 +708,12 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
  <section class="blk pres"><div class="preset"><span class="plab">Preset</span><code id="p-frozen-smelt-0">AAF_PRESET_OBFZ|v1Xuh8aW9uQW5pZzzjiwtxXFz2inXaPV/+Bd0aOVfidU/gH7bLtfJ5mrkvmJ5i4IsxjJYGWN4uExlOEpYgmDhHvtJRu9lcFuwzkTNQKCfhFwREECU/2D3LL1qMn8b/DgQwaxemapP4U2D6rbTzwTtmMcJtoUHOzk15m0NSLPXuRc7yWOH/BLVQUqHw5TElINgIVzIgRA36BCDtcdw+SXvmNsOsyrtCyiF5A7i98lp0r+bJEg5B8Vxi6d+g2z0cmdqBTlSMDJ0kSmwIT36FLJmOPfvuPBqLxkDBLDCntj4Ji3LdwWyaE3JldA==</code><button type="button" class="copy" data-t="p-frozen-smelt-0">Copy</button></div></section>
 </article>
 <article class="card g-storm" id="blinding-silence" data-dmg="Debuff" data-stars="5">
+ <button type="button" class="maxi" aria-label="Open in focus view" title="Focus view"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
  <header class="ch">
   <div class="kit"><span class="tile big" tabindex="0" role="img" aria-label="Blinding Silence (Weapon)" data-tip="Blinding Silence" data-kind="Weapon"><i class="ic i104" aria-hidden="true"></i></span><span class="tile big" tabindex="0" role="img" aria-label="Lightning Lizard (Costume)" data-tip="Lightning Lizard" data-kind="Costume"><i class="ic i105" aria-hidden="true"></i></span></div>
   <div class="ttl">
    <div class="meta"><span class="stars" aria-label="5 out of 5">★★★★★<span class="off"></span></span><span class="band">Storm</span></div>
-   <h2>Blinding Silence</h2>
+   <div class="hrow"><h2>Blinding Silence</h2><button type="button" class="cpname" aria-label="Copy build name" title="Copy build name"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
    <p class="dmg">Debuff <span>· Plasma</span></p>
   </div>
  </header>
@@ -708,11 +731,12 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
  <section class="blk pres"><div class="preset"><span class="plab">Preset</span><code id="p-blinding-silence-0">AAF_PRESET_OBFZ|v1Xuh8aW9uQW5pZyz8ey62XVz0kjucU958ur9ABcIrO7OVyYXzhSLQ7nDluV6SWnCzl6fsq9zAgsr3PEpMO1ShiriJxhmO9+S/CyTxMw9LkQ++N5pT5F7xlO4ltlQ5t3JFBPynPW1RNukyW7R0UGctft2tRWZGi2Nf4S4sYUnmCAOoJQeGSwNb8XMSd1Je5iagLt1FVevRiHV9N151dGmz9btxfNU3TGRtSXm+7APhlgPnE/5u4OEZAM7GbWLgyBE9qbcY12jm65AFjT+XjsxjsRjXNjhJ5GClJPB3VnuSy4pEIpsLHA3XDW21rKm6nN4WCTf3guJvQW4=</code><button type="button" class="copy" data-t="p-blinding-silence-0">Copy</button></div></section>
 </article>
 <article class="card g-storm" id="cloud-9" data-dmg="Storm Cloud" data-stars="4">
+ <button type="button" class="maxi" aria-label="Open in focus view" title="Focus view"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
  <header class="ch">
   <div class="kit"><span class="tile big" tabindex="0" role="img" aria-label="Lightning Greatsword &quot;E3G&quot; (Weapon)" data-tip="Lightning Greatsword &quot;E3G&quot;" data-kind="Weapon"><i class="ic i116" aria-hidden="true"></i></span><span class="tile big" tabindex="0" role="img" aria-label="Lightning Lizard (Costume)" data-tip="Lightning Lizard" data-kind="Costume"><i class="ic i105" aria-hidden="true"></i></span></div>
   <div class="ttl">
    <div class="meta"><span class="stars" aria-label="4 out of 5">★★★★<span class="off">★</span></span><span class="band">Storm</span></div>
-   <h2>Cloud 9</h2>
+   <div class="hrow"><h2>Cloud 9</h2><button type="button" class="cpname" aria-label="Copy build name" title="Copy build name"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
    <p class="dmg">Storm Cloud</p>
   </div>
  </header>
@@ -730,11 +754,12 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
  <section class="blk pres"><div class="preset"><span class="plab">Preset</span><code id="p-cloud-9-0">AAF_PRESET_OBFZ|v1Xuh8aW9uQW5pZzzjiy+2XVz2iuKXUt58uj/478LTnOb+9sLUYaD9MFlOt591UdV5eYEMGDROr0JJr7gy5IupMeAx3nG38Mpm4Qrjf5qX8DCuo34MvFrN29se+A8bTBYZdXmM6wNnMnCabVWiNodx0UUr57hTe+74haN4sftU6QJoOclNwPanFxJEgHH+UZin8hC7wx7IZXhQUWvP8f+HbEwMP3PDK5IZvfO2ClZpGIVHdURN4KcKJYWzE7VPmLgiL1mEKRadw2mNg1BVtYxMpLODcb+4Juifl5SiF3mLtR0IkffVBM5+mxynsi2IllKmeZku725uQQ==</code><button type="button" class="copy" data-t="p-cloud-9-0">Copy</button></div></section>
 </article>
 <article class="card g-storm" id="boomerangs" data-dmg="Artifact" data-stars="5">
+ <button type="button" class="maxi" aria-label="Open in focus view" title="Focus view"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
  <header class="ch">
   <div class="kit"><span class="tile big" tabindex="0" role="img" aria-label="Yui&#x27;s Short Dagger (Weapon)" data-tip="Yui&#x27;s Short Dagger" data-kind="Weapon"><i class="ic i124" aria-hidden="true"></i></span><span class="tile big" tabindex="0" role="img" aria-label="Turtle (Costume)" data-tip="Turtle" data-kind="Costume"><i class="ic i125" aria-hidden="true"></i></span></div>
   <div class="ttl">
    <div class="meta"><span class="stars" aria-label="5 out of 5">★★★★★<span class="off"></span></span><span class="band">Storm</span></div>
-   <h2>Boomerangs</h2>
+   <div class="hrow"><h2>Boomerangs</h2><button type="button" class="cpname" aria-label="Copy build name" title="Copy build name"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
    <p class="dmg">Artifact <span>· Lightning Boomerang</span></p>
   </div>
  </header>
@@ -752,11 +777,12 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
  <section class="blk pres"><div class="preset"><span class="plab">Preset</span><code id="p-boomerangs-0">AAF_PRESET_OBFZ|v1Xuh8aW9uQW5pZyzjfQqxLUD2nvCeU0GEIoUxPq1L2d/wNGv5EILNYYWTUbhLMfSLUfgTE7UyuqrevF9oONSgioCh9hn+9zWu+wlrpr0xozqLj8u7rxE3BTogLpgTYLFzan0k7kB0fno2YJr0bBBBVEo6ZchPzWnsLOYxZd6tL9exwMnBDkOyE3iRR3bJRIM9ZWD1TCDB08F/ZccOBAINKCeE4HkTJ+mSaWp55WJpPKvXWWQJSDU8awWaFytpiUfQdDr0Jef1MENAzSvfNKb9uEVNcnjJUrv/XpPVVraLsNV8UW9Mvgo4OsS7utmM/dG6uxGJxtOVQmnLxbjIR2Fy</code><button type="button" class="copy" data-t="p-boomerangs-0">Copy</button></div></section>
 </article>
 <article class="card g-arcane" id="adamah-s-oath" data-dmg="Weapon Effect" data-stars="5">
+ <button type="button" class="maxi" aria-label="Open in focus view" title="Focus view"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
  <header class="ch">
   <div class="kit"><span class="tile big" tabindex="0" role="img" aria-label="Adamah&#x27;s Oath (Weapon)" data-tip="Adamah&#x27;s Oath" data-kind="Weapon"><i class="ic i133" aria-hidden="true"></i></span><span class="tile big" tabindex="0" role="img" aria-label="Wing-Eared Rabbit (Costume)" data-tip="Wing-Eared Rabbit" data-kind="Costume"><i class="ic i134" aria-hidden="true"></i></span></div>
   <div class="ttl">
    <div class="meta"><span class="stars" aria-label="5 out of 5">★★★★★<span class="off"></span></span><span class="band">Arcane</span></div>
-   <h2>Adamah&#x27;s Oath</h2>
+   <div class="hrow"><h2>Adamah&#x27;s Oath</h2><button type="button" class="cpname" aria-label="Copy build name" title="Copy build name"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
    <p class="dmg">Weapon Effect <span>· Magic Blade</span></p>
   </div>
  </header>
@@ -774,11 +800,12 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
  <section class="blk pres"><div class="preset"><span class="plab">Preset</span><code id="p-adamah-s-oath-0">AAF_PRESET_OBFZ|v1Xuh8aW9uQW5pZyzjfQq2XUD2HvKb/V7TSinzP/CIeIe8opfk0bzmaWPtcgiAgmMRyzuWHcMOByUYdMwO7sZlmAFGtrE20pLe6P5Nsw25050urG3MV8fAJfOE/C0l/lWAEBw9MNYKt4/cxRghZF7FfeNoZXfHSzh+5WAMPFxOg8xAbzhk3szRVOLYDho0lgPBax5jeXUhjucQ13V8W7a130TcZgS0bYO64WOjbV55aFbnQ6QhSgazc/bQjbtTYyv0J/cajNzm2egvJ8r0U9O5iN4K6JbCkWZEyY/Ws6yJ9x5qHCdJwwp5WoSjqkERdJGesIqZ1p2ATvGnPTj9R2Fy</code><button type="button" class="copy" data-t="p-adamah-s-oath-0">Copy</button></div></section>
 </article>
 <article class="card g-arcane" id="crystal-shard" data-dmg="Special Attack" data-stars="4">
+ <button type="button" class="maxi" aria-label="Open in focus view" title="Focus view"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
  <header class="ch">
   <div class="kit"><span class="tile big" tabindex="0" role="img" aria-label="Lazarion (Weapon)" data-tip="Lazarion" data-kind="Weapon"><i class="ic i138" aria-hidden="true"></i></span><span class="tile big" tabindex="0" role="img" aria-label="White Rabbit (Costume)" data-tip="White Rabbit" data-kind="Costume"><i class="ic i23" aria-hidden="true"></i></span></div>
   <div class="ttl">
    <div class="meta"><span class="stars" aria-label="4 out of 5">★★★★<span class="off">★</span></span><span class="band">Arcane</span></div>
-   <h2>Crystal Shard</h2>
+   <div class="hrow"><h2>Crystal Shard</h2><button type="button" class="cpname" aria-label="Copy build name" title="Copy build name"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
    <p class="dmg">Special Attack <span>· Summons</span></p>
   </div>
  </header>
@@ -796,11 +823,12 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
  <section class="blk pres"><div class="preset"><span class="plab">Preset</span><code id="p-crystal-shard-0">AAF_PRESET_OBFZ|v1Xuh8aW9uQW5pZwTjh2vxXUA2ivKZPVmxJeF9BAdUSQmxfxXAEcYekv6inirTVGws10hGQp5EO0/XE8ijvRsbkgQX74XfBhSnHDxC/TS233NxwDPpqRnpD2BdG4HAqzvyQlJEve/bDO3KZaMgfIxIgc1hQDjJ3zmIRE+mK66qwPxhaQOy5KRnlf5ZDLJWtfmsXJldAz+0WDovTowCbGwDGK9LcoJqkaTgvphdQwAX/P6x9FtWHLirl9J1+9/yg6ysvmaNUBW3X3JldA==</code><button type="button" class="copy" data-t="p-crystal-shard-0">Copy</button></div><p class="credit">Build credit: @manhuntingdoge</p></section>
 </article>
 <article class="card g-arcane" id="magic-wand" data-dmg="Special Attack" data-stars="4">
+ <button type="button" class="maxi" aria-label="Open in focus view" title="Focus view"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5 9 7M2.5 13.5 7 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
  <header class="ch">
   <div class="kit"><span class="tile big" tabindex="0" role="img" aria-label="Prismatic Magic Wand (Weapon)" data-tip="Prismatic Magic Wand" data-kind="Weapon"><i class="ic i145" aria-hidden="true"></i></span><span class="tile big" tabindex="0" role="img" aria-label="Scholar Pig (Costume)" data-tip="Scholar Pig" data-kind="Costume"><i class="ic i96" aria-hidden="true"></i></span></div>
   <div class="ttl">
    <div class="meta"><span class="stars" aria-label="4 out of 5">★★★★<span class="off">★</span></span><span class="band">Arcane</span></div>
-   <h2>Magic Wand</h2>
+   <div class="hrow"><h2>Magic Wand</h2><button type="button" class="cpname" aria-label="Copy build name" title="Copy build name"><svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
    <p class="dmg">Special Attack</p>
   </div>
  </header>
@@ -820,6 +848,7 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
  <p class="foot">From the “HM60 builds” sheet (last updated 29-09-26). Preset codes copy exactly as written in the sheet.</p>
 </div>
 
+<dialog id="focus" aria-label="Build focus view"></dialog>
 <script>
 (function(){
   var chips=[].slice.call(document.querySelectorAll('.chip'));
@@ -898,6 +927,31 @@ body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);}
   document.addEventListener('focusout',hideTip);
   document.addEventListener('click',function(e){var t=e.target.closest('[data-tip]'); if(t)showTip(t);else hideTip()});
   addEventListener('scroll',hideTip,{passive:true});
+  // Build name copy
+  document.querySelectorAll('.cpname').forEach(function(btn){
+    var icon=btn.innerHTML;
+    btn.addEventListener('click',function(){
+      var h=btn.parentNode.querySelector('h2');
+      function done(){btn.classList.add('ok');btn.innerHTML='<svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';btn.setAttribute('aria-label','Copied');setTimeout(function(){btn.classList.remove('ok');btn.innerHTML=icon;btn.setAttribute('aria-label','Copy build name')},1600)}
+      function fallback(){var r=document.createRange();r.selectNodeContents(h);var sel=getSelection();sel.removeAllRanges();sel.addRange(r)}
+      try{navigator.clipboard.writeText(h.textContent).then(done,fallback)}catch(e){fallback()}
+    });
+  });
+  // Focus view: the real card moves into a modal dialog (a placeholder holds its grid slot) and back on close
+  var dlg=document.getElementById('focus'), ph=null, fcard=null, maxIcon=document.querySelector('.maxi').innerHTML,
+      closeIcon='<svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+  function setMaxi(card,open){var b=card.querySelector('.maxi'); b.innerHTML=open?closeIcon:maxIcon; b.setAttribute('aria-label',open?'Close focus view':'Open in focus view'); b.title=open?'Close':'Focus view'}
+  function openFocus(card){
+    hideTip(); fcard=card; ph=document.createElement('div'); ph.style.height=card.offsetHeight+'px'; card.before(ph);
+    dlg.appendChild(card); dlg.appendChild(tip); setMaxi(card,true); dlg.showModal(); dlg.scrollTop=0; card.querySelector('.maxi').focus();
+  }
+  dlg.addEventListener('close',function(){
+    hideTip(); if(!fcard)return; ph.replaceWith(fcard); document.body.appendChild(tip); setMaxi(fcard,false);
+    var b=fcard.querySelector('.maxi'); fcard=null; b.focus({preventScroll:true});
+  });
+  dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
+  dlg.addEventListener('scroll',hideTip,{passive:true});
+  document.querySelectorAll('.maxi').forEach(function(b){b.addEventListener('click',function(){var c=b.closest('.card'); if(c.parentNode===dlg)dlg.close(); else openFocus(c)})});
 })();
 </script>
 </body></html>

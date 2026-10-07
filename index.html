@@ -1038,20 +1038,25 @@ Normal Attack has a 20% chance to summon a Carrot Soldier."><i class="ic w11" ar
     hideTip(); fcard=card; ph=document.createElement('div'); ph.style.height=card.offsetHeight+'px'; card.before(ph);
     dlg.appendChild(card); dlg.appendChild(tip); setMaxi(card,true); dlg.showModal(); dlg.scrollTop=0; card.querySelector('.maxi').focus();
   }
-  dlg.addEventListener('close',function(){
-    hideTip(); if(!fcard)return; ph.replaceWith(fcard); document.body.appendChild(tip); setMaxi(fcard,false);
-    var b=fcard.querySelector('.maxi'); fcard=null; b.focus({preventScroll:true});
-  });
+  // Puts the focused card back in its grid slot right away (the dialog's close event fires later, too late
+  // when the card is about to move somewhere else, e.g. into picture-in-picture)
+  function closeFocus(){
+    if(!fcard)return null;
+    var c=fcard; fcard=null; hideTip(); ph.replaceWith(c); ph=null; document.body.appendChild(tip); setMaxi(c,false);
+    if(dlg.open)dlg.close();
+    return c;
+  }
+  dlg.addEventListener('close',function(){var c=closeFocus(); if(c)c.querySelector('.maxi').focus({preventScroll:true})});
   dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close()});
   dlg.addEventListener('scroll',hideTip,{passive:true});
-  document.querySelectorAll('.maxi').forEach(function(b){b.addEventListener('click',function(){var c=b.closest('.card'); if(c.parentNode===dlg)dlg.close(); else openFocus(c)})});
+  document.querySelectorAll('.maxi').forEach(function(b){b.addEventListener('click',function(){var c=b.closest('.card'); if(c===fcard){closeFocus(); b.focus({preventScroll:true})} else openFocus(c)})});
   // Picture-in-picture (desktop Chrome/Edge): the card moves into an always-on-top window and back when it closes
   if('documentPictureInPicture' in window && matchMedia('(pointer:fine) and (min-width:721px)').matches) document.documentElement.classList.add('can-pip');
   var pipWin=null, pipCard=null, pipPh=null;
   function setPip(card,on){var b=card.querySelector('.pip'); b.classList.toggle('on',on); b.setAttribute('aria-label',on?'Return card to page':'Pop out (picture-in-picture)'); b.title=on?'Return to page':'Picture-in-picture'}
   function returnPip(){if(!pipCard)return; pipPh.replaceWith(pipCard); setPip(pipCard,false); pipCard=pipPh=null}
   async function openPip(card){
-    if(card.parentNode===dlg)dlg.close();
+    if(card===fcard)closeFocus();
     if(!pipWin){
       pipWin=await documentPictureInPicture.requestWindow({width:480,height:720});
       var d=pipWin.document;
@@ -1060,7 +1065,7 @@ Normal Attack has a 20% chance to summon a Carrot Soldier."><i class="ic w11" ar
       bindTips(pipWin);
       pipWin.addEventListener('pagehide',function(){returnPip(); pipWin=null});
     }
-    returnPip();
+    returnPip(); if(card===fcard)closeFocus();
     pipPh=document.createElement('div'); pipPh.style.height=card.offsetHeight+'px'; card.before(pipPh);
     pipWin.document.body.appendChild(card); pipCard=card; setPip(card,true); pipWin.document.title=card.querySelector('h2').textContent;
   }
